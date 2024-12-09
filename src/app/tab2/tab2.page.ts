@@ -4,6 +4,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, Io
   IonList, IonItem, IonLabel, } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ProviderService } from '../services/provider.service';
 
 @Component({
   selector: 'app-tab2',
@@ -17,7 +18,13 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 })
 export class Tab2Page {
 
-  constructor() {}
+  /* Nombre de la coleccion */
+  collectionName = 'reviews';
+
+  /* Arreglo con datos locales */
+  dataList: any[] = [];
+
+  constructor(private providerService: ProviderService) {}
 
   myForm: FormGroup = new FormGroup({
     score: new FormControl("",Validators.required),
@@ -26,8 +33,18 @@ export class Tab2Page {
 
   /* El método onSubmit para enviar los datos del formulario mediante el servicio */
   onSubmit() {
-    console.log(this.myForm.value);
-    alert(this.myForm.controls["score"].value);
-    this.myForm.reset();
-  }  
+    this.providerService.createDocument(this.collectionName, this.myForm.value).then( () => {
+      this.myForm.reset();
+    });
+  }
+  
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.providerService.readCollection(this.collectionName).subscribe((data) => {
+      this.dataList = data;
+    })
+  }
 }
