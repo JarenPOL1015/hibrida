@@ -16,17 +16,17 @@
 
     <ion-card-content class="ion-text-center">
 
-      <form>
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
          
-        <ion-select label="Calificación" placeholder="Seleccione un valor">
+        <ion-select formControlName="score" label="Calificación" placeholder="Seleccione un valor">
           <ion-select-option value="bueno">Bueno</ion-select-option>
           <ion-select-option value="regular">Regular</ion-select-option>
           <ion-select-option value="malo">Malo</ion-select-option>
         </ion-select>
 
-        <ion-textarea label="Opinión" placeholder="Agregue aquí su descripción"></ion-textarea>
+        <ion-textarea formControlName="opinion" label="Opinión" placeholder="Agregue aquí su descripción"></ion-textarea>
          
-        <ion-button type="submit">Enviar</ion-button>
+        <ion-button type="submit" [disabled]="!myForm.valid">Enviar</ion-button>
          
       </form>
 
