@@ -1,17 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+ <ion-header [translucent]="true">
+   <ion-toolbar>
+     <ion-title>
+       Teachable Machine
+     </ion-title>
+   </ion-toolbar>
+ </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+ <ion-content [fullscreen]="true">
+   <ion-header collapse="condense">
+     <ion-toolbar>
+       <ion-title size="large">Teachable Machine</ion-title>
+     </ion-toolbar>
+   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+   <!-- CARGA DE IMAGEN - INICIO -->
+	 @if( imageReady() ) {
+      <ion-card>
+
+        <img [src]="imageUrl()" alt="Imagen Seleccionada">
+
+        <!-- CARGA DE PREDICCIÓN - INICIO -->
+		        
+        <!-- CARGA DE PREDICCIÓN - FIN -->
+
+      </ion-card>
+   } 
+   <!-- CARGA DE IMAGEN - FIN -->
+
+   <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)"  hidden />
+
+   <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+     <ion-fab-button (click)="fileInput.click()">
+       <ion-icon name="cloud-upload-outline"></ion-icon>
+     </ion-fab-button>
+   </ion-fab>
+
+ </ion-content>
