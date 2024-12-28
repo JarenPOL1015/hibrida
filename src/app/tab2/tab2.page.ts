@@ -1,50 +1,46 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonSelect, IonSelectOption, IonTextarea,IonButton,
-  IonList, IonItem, IonLabel, } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ProviderService } from '../services/provider.service';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCardSubtitle
+} from '@ionic/angular/standalone';
 
 @Component({
+  standalone: true,
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  standalone: true,
-  imports: [
-    IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    IonSelect, IonSelectOption, IonTextarea,IonButton, IonList, IonItem, IonLabel, ReactiveFormsModule
-  ]
+  imports: [IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCardSubtitle
+]
 })
 export class Tab2Page {
 
-  /* Nombre de la coleccion */
-  collectionName = 'reviews';
+  creadores = [
+    { imagen: 'assets/jaren.jpg', nombre: 'Jaren Pazmiño' },
+    { imagen: 'assets/ariel.jpg', nombre: 'Ariel Vargas' },
+    { imagen: 'assets/brian.jpg', nombre: 'Brian Mite' },
+  ];
 
-  /* Arreglo con datos locales */
-  dataList: any[] = [];
+  constructor() {}
 
-  constructor(private providerService: ProviderService) {}
-
-  myForm: FormGroup = new FormGroup({
-    score: new FormControl("",Validators.required),
-    opinion: new FormControl("",Validators.required)
-  });
-
-  /* El método onSubmit para enviar los datos del formulario mediante el servicio */
-  onSubmit() {
-    this.providerService.createDocument(this.collectionName, this.myForm.value).then( () => {
-      this.myForm.reset();
-    });
-  }
-  
-  ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    this.providerService.readCollection(this.collectionName).subscribe((data) => {
-      this.dataList = data;
-    })
-  }
 }

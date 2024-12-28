@@ -1,9 +1,13 @@
-.titulo {
-    color: var(--ion-color-primary);
-    font-weight: bold;
-    text-align: center;
-  }
- 
-  p#descripcion {
-    text-align: justify;
-  }
+ion-toolbar {
+  --background: #00A550; /* Barra de navegación verde */
+  color: #FFFFFF; /* Texto blanco */
+}
+
+ion-title {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+ion-content {
+  --background: #F8F9FA;
+  color: #343A40;
+}
